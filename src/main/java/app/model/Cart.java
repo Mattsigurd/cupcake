@@ -16,4 +16,8 @@ public class Cart {
         return cartItems;
     }
 
+    public void deleteCartItems(Orderline orderline){
+
+        cartItems.remove(orderline);
+    }
 }
