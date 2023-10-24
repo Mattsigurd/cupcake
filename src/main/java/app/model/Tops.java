@@ -3,12 +3,12 @@ package app.model;
 public class Tops {
 
     private int top_id;
-    private String name;
+    private String top;
     private double price;
 
-    public Tops(int top_id, String name, double price) {
+    public Tops(int top_id, String top, double price) {
         this.top_id = top_id;
-        this.name = name;
+        this.top = top;
         this.price = price;
     }
 
@@ -16,8 +16,8 @@ public class Tops {
         return top_id;
     }
 
-    public String getName() {
-        return name;
+    public String getTop() {
+        return top;
     }
 
     public double getPrice() {
@@ -28,7 +28,7 @@ public class Tops {
     public String toString() {
         return "Tops{" +
                 "top_id=" + top_id +
-                ", name='" + name + '\'' +
+                ", name='" + top + '\'' +
                 ", price=" + price +
                 '}';
     }
