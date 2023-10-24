@@ -14,7 +14,7 @@ public class Cart {
 
     private List<Orderline> cart(ConnectionPool connectionPool) throws DatabaseException {
         List<Orderline> cartList = new ArrayList<>();
-        String sql = "SELECT orderline.id, orderline.order_id, orderline.quantity, the_tops.top AS top, the_bottoms.bottom AS bottom, " +
+        String sql = "SELECT orderline.id, orderline.order_id, orderline.quantity, the_tops.top, the_bottoms.bottom, " +
                 "orderline.total_price FROM orderline JOIN the_tops ON orderline.top_id = the_tops.top_id JOIN the_bottoms ON orderline.bottom_id = the_bottoms.bottom_id;";
 
         try (Connection connection = connectionPool.getConnection()) {
