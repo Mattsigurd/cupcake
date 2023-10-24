@@ -8,6 +8,7 @@ public class Orderline {
     Bottoms bottoms;
     private int totalPrice;
 
+
     public Orderline(int id, int orderID, int quantity, Tops tops, Bottoms bottoms, int totalPrice) {
         this.id = id;
         this.orderID = orderID;
