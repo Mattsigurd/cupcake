@@ -1,6 +1,6 @@
 package app.persistence;
 
-import app.entities.Tops;
+import app.model.Tops;
 import app.exceptions.DatabaseException;
 
 import java.sql.Connection;

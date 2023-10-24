@@ -1,4 +1,4 @@
-package app.entities;
+package app.model;
 
 public class Tops {
 
