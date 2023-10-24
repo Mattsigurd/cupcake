@@ -1,4 +1,4 @@
-package app.entities;
+package app.model;
 
 public class Orderline {
     private int id;
@@ -6,8 +6,8 @@ public class Orderline {
     private int totalPrice;
 
     public Orderline(){
-        Top top;
-        Bottom bottom;
+        Tops top;
+        Bottoms bottom;
     }
     public int getId() {
         return id;
