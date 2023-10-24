@@ -2,20 +2,46 @@ package app.controllers;
 
 import app.entities.User;
 import app.exceptions.DatabaseException;
+import app.model.Bottoms;
+import app.model.Tops;
+import app.persistence.BottomMapper;
 import app.persistence.ConnectionPool;
+import app.persistence.TopMapper;
 import app.persistence.UserMapper;
 import io.javalin.http.Context;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserController
 {
     public static void login(Context ctx, ConnectionPool connectionPool)
     {
+        Map<Integer, Tops> topsMap;
+        Map<Integer, Bottoms> bottomsMap;
+
         String name = ctx.formParam("username");
         String password = ctx.formParam("password");
         try
         {
             User user = UserMapper.login(name, password, connectionPool);
             ctx.sessionAttribute("currentUser", user);
+            topsMap = (HashMap<Integer, Tops>) ctx.sessionAttribute("topsMap");
+            if (topsMap == null)
+            {
+
+                // Hent alle tops fra DB og gem i Hashmap
+                topsMap = TopMapper.getAllTops(connectionPool);
+                ctx.sessionAttribute("topsMap", topsMap);
+            }
+            bottomsMap = (HashMap<Integer,  Bottoms>) ctx.sessionAttribute("bottomsMap");
+            if (bottomsMap == null)
+            {
+                // Hent alle bottoms fra DB og gem i Hashmap
+                bottomsMap = BottomMapper.getAllBottoms(connectionPool);
+                ctx.sessionAttribute("bottomsMap", bottomsMap);
+
+            }
             ctx.attribute("message", "Du er nu logget ind");
             ctx.render("index.html");
         }

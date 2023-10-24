@@ -9,7 +9,16 @@ public class Orderline {
     Bottoms bottoms;
     private int totalPrice;
 
+    private int top_id;
+    private int bottom_id;
 
+
+
+    public Orderline(int top_id, int bottom_id, int quantity) {
+        this.top_id = top_id;
+        this.bottom_id = bottom_id;
+        this.quantity = quantity;
+    }
     public Orderline(int id, int orderID, int quantity, Tops tops, Bottoms bottoms, int totalPrice) {
         this.id = id;
         this.orderID = orderID;
@@ -18,6 +27,14 @@ public class Orderline {
         this.bottoms = bottoms;
         this.totalPrice = totalPrice;
     }
+    public int getTop_id() {
+        return top_id;
+    }
+
+    public int getBottom_id() {
+        return bottom_id;
+    }
+
 
     public int getId() {
         return id;
