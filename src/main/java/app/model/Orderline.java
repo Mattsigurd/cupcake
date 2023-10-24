@@ -11,7 +11,7 @@ public class Orderline {
         this.orderID = orderID;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
-        
+
         Tops top;
         Bottoms bottom;
     }
