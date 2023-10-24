@@ -6,7 +6,12 @@ public class Orderline {
     private int totalPrice;
     private int orderID;
 
-    public Orderline(){
+    public Orderline(int id, int quantity, int totalPrice, int orderID){
+        this.id = id;
+        this.orderID = orderID;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        
         Tops top;
         Bottoms bottom;
     }
