@@ -1,6 +1,7 @@
 package app;
 
 import app.controllers.UserController;
+import app.model.Cart;
 import app.persistence.ConnectionPool;
 import config.ThymeleafConfig;
 import io.javalin.Javalin;
@@ -32,5 +33,7 @@ public class Main {
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
         app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));
         app.get("/logout", ctx -> UserController.logout(ctx));
+
+
     }
 }
