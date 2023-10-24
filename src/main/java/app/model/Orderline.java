@@ -4,6 +4,7 @@ public class Orderline {
     private int id;
     private int quantity;
     private int totalPrice;
+    private int orderID;
 
     public Orderline(){
         Tops top;
@@ -19,6 +20,9 @@ public class Orderline {
 
     public int getTotalPrice() {
         return totalPrice;
+    }
+    public int getOrderID(){
+        return orderID;
     }
 
 }
