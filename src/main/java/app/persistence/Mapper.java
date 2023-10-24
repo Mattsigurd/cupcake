@@ -22,7 +22,7 @@ public class Mapper {
                 while (rs.next()) {
                     int top_id = rs.getInt("top_id");
                     String top = rs.getString("top");
-                    int price = rs.getInt("price");
+                    double price = rs.getDouble("price");
                     topsList.add(new Tops(top_id, top, price));
                 }
             }
@@ -43,7 +43,7 @@ public class Mapper {
                 while (rs.next()) {
                     int bottom_id = rs.getInt("bottom_id");
                     String bottom = rs.getString("bottom");
-                    int price = rs.getInt("price");
+                    double price = rs.getDouble("price");
                     bottomsList.add(new Bottoms(bottom_id, bottom, price));
                 }
             }
