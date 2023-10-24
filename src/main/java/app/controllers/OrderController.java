@@ -7,6 +7,9 @@ import app.model.Orderline;
 import app.model.Tops;
 import io.javalin.http.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderController {
 
 
@@ -26,8 +29,22 @@ public class OrderController {
         }
 
         cart.addToCart(orderLine);
-        }
-
 
     }
-    
+
+        public void deletecartitems(Orderline orderline, Context ctx) {
+
+            User user = ctx.sessionAttribute("currentUser");
+            Cart cart = ctx.sessionAttribute("cart");
+
+            if (cart != null) {
+                List<Orderline> newOrderline =cart.getCartItems();
+
+                newOrderline.remove(orderline);
+
+
+                ctx.sessionAttribute("cart", cart);
+            }
+        }
+    }
+

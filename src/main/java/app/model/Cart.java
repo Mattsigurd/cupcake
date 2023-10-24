@@ -16,10 +16,4 @@ public class Cart {
         return cartItems;
     }
 
-    public List<Orderline> deleteCartItems(){
-
-
-
-        return cartItems;
-    }
 }
