@@ -8,6 +8,7 @@ import app.model.Orderline;
 import app.model.Tops;
 import app.persistence.BottomMapper;
 import app.persistence.ConnectionPool;
+import app.persistence.OrderMapper;
 import app.persistence.TopMapper;
 import io.javalin.http.Context;
 
@@ -71,7 +72,14 @@ public class OrderController {
         } catch (DatabaseException e) {
             throw new RuntimeException(e);
         }
-
     }
+
+    /*public static void showOrder(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
+        int order_id = Integer.parseInt(ctx.formParam("order_id"));
+        String order = OrderMapper.ge
+        System.out.println("Result: " + result); // Add this line for debugging
+        ctx.attribute("result", result);
+        ctx.render("groupFresult.html");
+    }*/
 }
 
