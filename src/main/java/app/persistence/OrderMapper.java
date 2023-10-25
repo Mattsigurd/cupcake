@@ -17,7 +17,7 @@ public class OrderMapper {
     private List<Orderline> getAllOrderLines(ConnectionPool connectionPool) throws DatabaseException {
         List<Orderline> cartList = new ArrayList<>();
         String sql = "SELECT orderline.id, orderline.order_id, orderline.quantity, tops.top, tops.top_id, " +
-                " tops.price as top_price, bottoms.bottom, bottoms.bottom_id, bottoms.price as bottom_price, " +
+                " tops.top_price as top_price, bottoms.bottom, bottoms.bottom_id, bottoms.bottom_price as bottom_price, " +
                 "orderline.total_price FROM orderline JOIN tops ON orderline.top_id = tops.top_id JOIN bottoms ON orderline.bottom_id = bottoms.bottom_id";
 
         try (Connection connection = connectionPool.getConnection()) {
@@ -27,16 +27,16 @@ public class OrderMapper {
                     int id = rs.getInt("id");
                     int order_id= rs.getInt("order_id");
                     int quantity = rs.getInt("quantity");
-                    int topId = rs.getInt("top_id");
-                    String topName = rs.getString("top");
-                    int topPrice = rs.getInt("top_price");
-                    int bottomId= rs.getInt("top_id");
-                    String bottomName = rs.getString("bottom");
-                    int bottomPrice = rs.getInt("price");
+                    int top_id = rs.getInt("top_id");
+                    String top = rs.getString("top");
+                    int price = rs.getInt("top_price");
+                    int bottom_id= rs.getInt("bottom_id");
+                    String bottom = rs.getString("bottom");
+                    int bottom_price = rs.getInt("bottom_price");
                     int total_price = rs.getInt("total_price");
                     cartList.add(new Orderline(id, order_id, quantity,
-                            new Tops(topId, topName, topPrice),
-                            new Bottoms(bottomId, bottomName, bottomPrice),
+                            new Tops(top_id, top, price),
+                            new Bottoms(bottom_id, bottom, bottom_price),
                             total_price));
                 }
             }
@@ -45,5 +45,23 @@ public class OrderMapper {
             throw new DatabaseException("Error in OrderMapper " + e);
         }
         return cartList;
+    }
+
+    private List<Orderline> getQuantity(ConnectionPool connectionPool) throws DatabaseException {
+        List<Orderline> quantityList = new ArrayList<>();
+        String sql = "SELECT orderline.quantity";
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int quantity = rs.getInt("quantity");
+                    quantityList.add(new Orderline(quantity));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new DatabaseException("Error in OrderMapper " + e);
+        }
+        return quantityList;
     }
 }

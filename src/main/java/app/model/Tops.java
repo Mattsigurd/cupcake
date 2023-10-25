@@ -6,11 +6,15 @@ public class Tops {
     private String top;
     private double price;
 
+
     public Tops(int top_id, String top, double price) {
         this.top_id = top_id;
         this.top = top;
         this.price = price;
     }
+
+
+
 
     public int getTop_id() {
         return top_id;

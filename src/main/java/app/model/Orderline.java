@@ -27,6 +27,12 @@ public class Orderline {
         this.bottoms = bottoms;
         this.totalPrice = totalPrice;
     }
+
+    public Orderline(int quantity) {
+        this.quantity = quantity;
+
+    }
+
     public int getTop_id() {
         return top_id;
     }

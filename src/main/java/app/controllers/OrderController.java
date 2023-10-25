@@ -76,9 +76,7 @@ public class OrderController {
 
     public static void allQuantity(Context ctx, ConnectionPool connectionPool){
 
-        try {
 
-        }
     }
 }
 

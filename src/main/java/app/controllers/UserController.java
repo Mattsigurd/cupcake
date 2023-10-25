@@ -54,9 +54,10 @@ public class UserController
 
     public static void createuser(Context ctx, ConnectionPool connectionPool)
     {
-        String name = ctx.formParam("username");
+        String name = ctx.formParam("email");
         String password1 = ctx.formParam("password1");
         String password2 = ctx.formParam("password2");
+        String role = ctx.formParam("role");
 
         // Validering af passwords - at de to matcher
         if (password1.equals(password2))
