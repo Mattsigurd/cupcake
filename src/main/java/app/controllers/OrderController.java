@@ -6,10 +6,7 @@ import app.model.Bottoms;
 import app.model.Cart;
 import app.model.Orderline;
 import app.model.Tops;
-import app.persistence.BottomMapper;
-import app.persistence.ConnectionPool;
-import app.persistence.OrderMapper;
-import app.persistence.TopMapper;
+import app.persistence.*;
 import io.javalin.http.Context;
 
 import java.util.ArrayList;
@@ -74,9 +71,23 @@ public class OrderController {
         }
     }
 
-    public static void allQuantity(Context ctx, ConnectionPool connectionPool){
+    public static void createOrder(Context ctx) {
+        User user = ctx.sessionAttribute("currentUser");
 
 
+        int topId = Integer.parseInt(ctx.formParam("top_id"));
+        int bottomId = Integer.parseInt(ctx.formParam("bottom_id"));
+        int quantity = Integer.parseInt(ctx.formParam("quantity"));
+
+        Orderline orderline = new Orderline(topId, bottomId, quantity);
+
+        Cart cart = ctx.sessionAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+            ctx.sessionAttribute("cart", cart);
+        }
+        cart.addToCart(orderline);
+        ctx.redirect("/cart");
     }
 }
 

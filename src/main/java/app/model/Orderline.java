@@ -41,6 +41,17 @@ public class Orderline {
         return bottom_id;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setTop_id(int top_id) {
+        this.top_id = top_id;
+    }
+
+    public void setBottom_id(int bottom_id) {
+        this.bottom_id = bottom_id;
+    }
 
     public int getId() {
         return id;

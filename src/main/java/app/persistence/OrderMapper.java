@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderMapper {
 
@@ -47,21 +49,5 @@ public class OrderMapper {
         return cartList;
     }
 
-    private List<Orderline> getQuantity(ConnectionPool connectionPool) throws DatabaseException {
-        List<Orderline> quantityList = new ArrayList<>();
-        String sql = "SELECT orderline.quantity";
-        try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    int quantity = rs.getInt("quantity");
-                    quantityList.add(new Orderline(quantity));
-                }
-            }
 
-        } catch (SQLException e) {
-            throw new DatabaseException("Error in OrderMapper " + e);
-        }
-        return quantityList;
-    }
 }

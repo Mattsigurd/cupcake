@@ -38,6 +38,6 @@ public class Main {
             OrderController.allTops(ctx, connectionPool);
             OrderController.allBottoms(ctx, connectionPool);
         });
-
+        app.post("/cart", ctx-> OrderController.createOrder(ctx));
     }
 }
