@@ -17,11 +17,16 @@
             <img src="public/images/cupcakes.png" height="305" width="955"/>
             <h1 th:text="${Indkøbskurv}"></h1>
         </header>
-
-
-
+        <form action="/cart" method="post">
+        <ol>
+            <li th:each="orderline : ${cartItems}">
+                <span th:text="${orderline.quantity + ' x ' + orderline.tops.top + ' med ' + orderline.bottoms.bottom + ' - samlet beløb: ' + orderline.totalPrice + ' kroner'}"></span>
+            </li>
+        </ol>
+        </form>
 
         <footer th:fragment="footer">
+            <a href="/order">Tilbage til bestillinger</a>
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
             <a href="/">Home</a>
         </footer>

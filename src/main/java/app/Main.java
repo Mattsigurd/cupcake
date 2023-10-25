@@ -26,7 +26,7 @@ public class Main {
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/public");
             JavalinThymeleaf.init(ThymeleafConfig.templateEngine());
-        }).start(7070);
+        }).start(7090);
 
         // Routing
 
@@ -39,8 +39,8 @@ public class Main {
             OrderController.allTops(ctx, connectionPool);
             OrderController.allBottoms(ctx, connectionPool);
         });
-        //app.post("/cart", ctx-> OrderController.createOrder(ctx));
         app.get("/cart", ctx ->  ctx.render("cart.html"));
+       // app.post("/cart", ctx-> OrderController.createOrder(ctx));
         app.post("/cart", ctx -> {
             int topId = Integer.parseInt(ctx.formParam("top_id"));
             int bottomId = Integer.parseInt(ctx.formParam("bottom_id"));
