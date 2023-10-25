@@ -37,7 +37,7 @@ public class OrderController {
 
     }
 
-        public void deletecartitems(Orderline orderline, Context ctx) {
+        public void deleteOrderlines(Orderline orderline, Context ctx) {
 
             User user = ctx.sessionAttribute("currentUser");
             Cart cart = ctx.sessionAttribute("cart");
