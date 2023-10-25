@@ -51,6 +51,7 @@ public class UserController
             }
             ctx.attribute("message", "Du er nu logget ind");
             ctx.render("order.html");
+
         }
         catch (DatabaseException e)
         {

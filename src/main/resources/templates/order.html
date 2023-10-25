@@ -22,18 +22,20 @@
             <select name="top_id">
                 <option th:each="tops : ${#ctx.topsList}"
                         th:value="${tops.top_id}"
-                        th:text="${tops.top + ' - cost: ' + tops.top_price + ' kroner'}"></option>
+                        th:text="${tops.top_id + tops.top + ' - cost: ' + tops.top_price + ' kroner'}"></option>
             </select>
             <select name="bottom_id">
                 <option th:each="bottoms : ${#ctx.bottomsList}"
                         th:value="${bottoms.bottom_id}"
-                        th:text="${bottoms.bottom + ' - cost: ' + bottoms.bottom_price + ' kroner'}"></option>
+                        th:text="${bottoms.bottom_id + bottoms.bottom + ' - cost: ' + bottoms.bottom_price + ' kroner'}"></option>
             </select>
             <label for="quantity">Quantity:</label>
             <input type="number" name="quantity" id="quantity" value="1" min="1">
             <button type="submit">Submit</button>
 
         </form>
+
+        <button type="submit" th:href="@{/cart.html}">Indkøbskurv</button>
 
 
         <footer th:fragment="footer">

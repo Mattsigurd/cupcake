@@ -70,10 +70,10 @@ public class OrderController {
             ctx.sessionAttribute("cart", cart);
         }
         cart.addToCart(orderline);
-        ctx.redirect("/cart");
+        ctx.redirect("/order");
     }
 
-    public void addtocart(Orderline orderline, Context ctx){
+    /*public static void addtocart(Orderline orderline, Context ctx){
 
         User user = ctx.sessionAttribute("currentUser");
         Cart cart = ctx.sessionAttribute("cart");
@@ -89,7 +89,20 @@ public class OrderController {
         }
 
         cart.addToCart(orderLine);
+        //ctx.redirect("/cart");
+    }*/
+    public static void addtocart(Orderline orderline, Context ctx) {
+        User user = ctx.sessionAttribute("currentUser");
+        Cart cart = ctx.sessionAttribute("cart");
 
+        if (cart == null) {
+            cart = new Cart();
+            ctx.sessionAttribute("cart", cart);
+        }
+
+        cart.addToCart(orderline);
+
+       // ctx.redirect("/cart");
     }
 }
 

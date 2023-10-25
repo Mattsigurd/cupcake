@@ -3,6 +3,7 @@ package app;
 import app.controllers.OrderController;
 import app.controllers.UserController;
 import app.model.Cart;
+import app.model.Orderline;
 import app.persistence.ConnectionPool;
 import config.ThymeleafConfig;
 import io.javalin.Javalin;
@@ -38,6 +39,14 @@ public class Main {
             OrderController.allTops(ctx, connectionPool);
             OrderController.allBottoms(ctx, connectionPool);
         });
-        app.post("/cart", ctx-> OrderController.createOrder(ctx));
+        //app.post("/cart", ctx-> OrderController.createOrder(ctx));
+        app.get("/cart", ctx ->  ctx.render("cart.html"));
+        app.post("/cart", ctx -> {
+            int topId = Integer.parseInt(ctx.formParam("top_id"));
+            int bottomId = Integer.parseInt(ctx.formParam("bottom_id"));
+            int quantity = Integer.parseInt(ctx.formParam("quantity"));
+            OrderController.addtocart(new Orderline(topId, bottomId, quantity), ctx);
+            ctx.redirect("/cart");
+        });
     }
 }
