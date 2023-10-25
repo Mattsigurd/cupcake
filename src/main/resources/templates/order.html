@@ -18,8 +18,22 @@
             <h1 th:text="${title}"></h1>
         </header>
 
+        <form action="/order" method="post">
+            <select name="top_id">
+                <option th:each="tops : ${Tops}"
+                        th:value="${tops.top_id}"
+                        th:text="${tops.top + ' - cost: ' + tops.price + ' kroner'}"></option>
+            </select>
+            <select name="bottom_id">
+                <option th:each="bottoms : ${Bottoms}"
+                        th:value="${bottoms.bottom_id}"
+                        th:text="${bottoms.bottom + ' - cost: ' + bottoms.price + ' kroner'}"></option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+
+
         <footer th:fragment="footer">
-            <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Create account</a>
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
             <a href="/">Home</a>
         </footer>
