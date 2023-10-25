@@ -17,7 +17,7 @@ import java.util.Map;
 public class OrderMapper {
 
     private List<Orderline> getAllOrderLines(ConnectionPool connectionPool) throws DatabaseException {
-        List<Orderline> cartList = new ArrayList<>();
+        List<Orderline> orderlineList = new ArrayList<>();
         String sql = "SELECT orderline.id, orderline.order_id, orderline.quantity, tops.top, tops.top_id, " +
                 " tops.top_price as top_price, bottoms.bottom, bottoms.bottom_id, bottoms.bottom_price as bottom_price, " +
                 "orderline.total_price FROM orderline JOIN tops ON orderline.top_id = tops.top_id JOIN bottoms ON orderline.bottom_id = bottoms.bottom_id";
@@ -36,7 +36,7 @@ public class OrderMapper {
                     String bottom = rs.getString("bottom");
                     int bottom_price = rs.getInt("bottom_price");
                     int total_price = rs.getInt("total_price");
-                    cartList.add(new Orderline(id, order_id, quantity,
+                    orderlineList.add(new Orderline(id, order_id, quantity,
                             new Tops(top_id, top, price),
                             new Bottoms(bottom_id, bottom, bottom_price),
                             total_price));
@@ -46,7 +46,7 @@ public class OrderMapper {
         } catch (SQLException e) {
             throw new DatabaseException("Error in OrderMapper " + e);
         }
-        return cartList;
+        return orderlineList;
     }
 
 
