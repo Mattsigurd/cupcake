@@ -24,7 +24,7 @@ public class TopMapper {
                 while (rs.next()) {
                     int top_id = rs.getInt("top_id");
                     String top = rs.getString("top");
-                    int price = rs.getInt("price");
+                    int price = rs.getInt("top_price");
                     Tops tops = new Tops(top_id, top, price);
                     topsMap.put(top_id, tops);
 

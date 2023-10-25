@@ -4,13 +4,13 @@ public class Tops {
 
     private int top_id;
     private String top;
-    private double price;
+    private double top_price;
 
 
-    public Tops(int top_id, String top, double price) {
+    public Tops(int top_id, String top, double top_price) {
         this.top_id = top_id;
         this.top = top;
-        this.price = price;
+        this.top_price = top_price;
     }
 
 
@@ -24,8 +24,8 @@ public class Tops {
         return top;
     }
 
-    public double getPrice() {
-        return price;
+    public double getTop_price() {
+        return top_price;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Tops {
         return "Tops{" +
                 "top_id=" + top_id +
                 ", name='" + top + '\'' +
-                ", price=" + price +
+                ", price=" + top_price +
                 '}';
     }
 }

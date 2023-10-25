@@ -25,7 +25,7 @@ public class BottomMapper {
                 while (rs.next()) {
                     int bottom_id = rs.getInt("bottom_id");
                     String bottom = rs.getString("bottom");
-                    int price = rs.getInt("price");
+                    int price = rs.getInt("bottom_price");
                     Bottoms bottoms = new Bottoms(bottom_id, bottom, price);
                     bottomsMap.put(bottom_id, bottoms);
 

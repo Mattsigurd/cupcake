@@ -4,12 +4,12 @@ public class Bottoms {
 
     private int bottom_id;
     private String bottom;
-    private double price;
+    private double bottom_price;
 
-    public Bottoms(int bottom_id, String bottom, double price) {
+    public Bottoms(int bottom_id, String bottom, double bottom_price) {
         this.bottom_id = bottom_id;
         this.bottom = bottom;
-        this.price = price;
+        this.bottom_price = bottom_price;
     }
 
     public Bottoms(String bottom) {
@@ -26,8 +26,8 @@ public class Bottoms {
         return bottom;
     }
 
-    public double getPrice() {
-        return price;
+    public double getBottom_price() {
+        return bottom_price;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Bottoms {
         return "Bottoms{" +
                 "bottom_id=" + bottom_id +
                 ", bottom='" + bottom + '\'' +
-                ", price=" + price +
+                ", price=" + bottom_price +
                 '}';
     }
 }

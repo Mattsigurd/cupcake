@@ -20,7 +20,7 @@ public class UserController
         Map<Integer, Tops> topsMap;
         Map<Integer, Bottoms> bottomsMap;
 
-        String name = ctx.formParam("username");
+        String name = ctx.formParam("email");
         String password = ctx.formParam("password");
         try
         {
@@ -43,7 +43,7 @@ public class UserController
 
             }
             ctx.attribute("message", "Du er nu logget ind");
-            ctx.render("index.html");
+            ctx.render("order.html");
         }
         catch (DatabaseException e)
         {
