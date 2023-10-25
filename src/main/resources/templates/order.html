@@ -29,7 +29,10 @@
                         th:value="${bottoms.bottom_id}"
                         th:text="${bottoms.bottom + ' - cost: ' + bottoms.price + ' kroner'}"></option>
             </select>
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" id="quantity" value="1" min="1">
             <button type="submit">Submit</button>
+
         </form>
 
 

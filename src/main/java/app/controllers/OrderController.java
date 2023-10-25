@@ -74,12 +74,11 @@ public class OrderController {
         }
     }
 
-    /*public static void showOrder(Context ctx, ConnectionPool connectionPool) throws DatabaseException {
-        int order_id = Integer.parseInt(ctx.formParam("order_id"));
-        String order = OrderMapper.ge
-        System.out.println("Result: " + result); // Add this line for debugging
-        ctx.attribute("result", result);
-        ctx.render("groupFresult.html");
-    }*/
+    public static void allQuantity(Context ctx, ConnectionPool connectionPool){
+
+        try {
+
+        }
+    }
 }
 
