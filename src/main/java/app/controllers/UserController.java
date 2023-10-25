@@ -10,7 +10,9 @@ import app.persistence.TopMapper;
 import app.persistence.UserMapper;
 import io.javalin.http.Context;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserController
@@ -33,13 +35,18 @@ public class UserController
                 // Hent alle tops fra DB og gem i Hashmap
                 topsMap = TopMapper.getAllTops(connectionPool);
                 ctx.sessionAttribute("topsMap", topsMap);
+                List<Tops> topsList = new ArrayList<>(topsMap.values());
+                ctx.attribute("topsList", topsList);
             }
             bottomsMap = (HashMap<Integer,  Bottoms>) ctx.sessionAttribute("bottomsMap");
+
             if (bottomsMap == null)
             {
                 // Hent alle bottoms fra DB og gem i Hashmap
                 bottomsMap = BottomMapper.getAllBottoms(connectionPool);
                 ctx.sessionAttribute("bottomsMap", bottomsMap);
+                List<Bottoms> bottomsList = new ArrayList<>(bottomsMap.values());
+                ctx.attribute("bottomsList", bottomsList);
 
             }
             ctx.attribute("message", "Du er nu logget ind");

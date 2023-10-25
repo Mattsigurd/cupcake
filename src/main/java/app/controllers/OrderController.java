@@ -35,7 +35,7 @@ public class OrderController {
 
         try {
             List<Tops> topsList = (List<Tops>) TopMapper.getAllTops(connectionPool);
-            ctx.attribute("Tops", topsList);
+            ctx.attribute("topsList", topsList);
             ctx.render("order.html");
         } catch (DatabaseException e) {
             throw new RuntimeException(e);

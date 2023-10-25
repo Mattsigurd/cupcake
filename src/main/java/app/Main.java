@@ -25,7 +25,7 @@ public class Main {
         Javalin app = Javalin.create(config -> {
             config.staticFiles.add("/public");
             JavalinThymeleaf.init(ThymeleafConfig.templateEngine());
-        }).start(7090);
+        }).start(7070);
 
         // Routing
 
