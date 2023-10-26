@@ -29,13 +29,17 @@
                         th:value="${bottoms.bottom_id}"
                         th:text="${bottoms.bottom_id + bottoms.bottom + ' - cost: ' + bottoms.bottom_price + ' kroner'}"></option>
             </select>
-            <label for="quantity">Quantity:</label>
-            <input type="number" name="quantity" id="quantity" value="1" min="1">
+            <form action="/calculate" method="post">
+                <label for="quantity">Quantity:</label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1">
+                <button type="submit">Calculate</button>
+            </form>
+
             <button type="submit">Submit</button>
 
         </form>
 
-        <button type="submit" th:href="@{/cart.html}">Indkøbskurv</button>
+        <button type="submit" href="@{/cart}">Indkøbskurv</button>
 
 
         <footer th:fragment="footer">

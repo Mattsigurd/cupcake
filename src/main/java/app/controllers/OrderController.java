@@ -8,9 +8,13 @@ import app.model.Orderline;
 import app.model.Tops;
 import app.persistence.*;
 import io.javalin.http.Context;
+import app.persistence.Calculator;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class OrderController {
 
@@ -91,7 +95,7 @@ public class OrderController {
         cart.addToCart(orderLine);
         //ctx.redirect("/cart");
     }*/
-    public static void addtocart(Orderline orderline, Context ctx) {
+    public static void addtocart(Orderline orderline, Context ctx) throws DatabaseException {
         User user = ctx.sessionAttribute("currentUser");
         Cart cart = ctx.sessionAttribute("cart");
 
@@ -100,9 +104,15 @@ public class OrderController {
             ctx.sessionAttribute("cart", cart);
         }
 
+        int calculatedPrice = Calculator.calculateTotalPrice(orderline.getTop_id(), orderline.getBottom_id(), orderline.getQuantity(), ConnectionPool.getInstance());
+
+
+        orderline.setTotalPrice(calculatedPrice);
+
         cart.addToCart(orderline);
 
-       // ctx.redirect("/cart");
+        //ctx.redirect("/cart");
+
     }
 }
 

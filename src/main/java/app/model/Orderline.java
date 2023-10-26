@@ -65,6 +65,7 @@ public class Orderline {
         return quantity;
     }
 
+
     public Tops getTops() {
         return tops;
     }
@@ -75,6 +76,10 @@ public class Orderline {
 
     public int getTotalPrice() {
         return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override
@@ -88,4 +93,5 @@ public class Orderline {
                 ", totalPrice=" + totalPrice +
                 '}';
     }
+
 }

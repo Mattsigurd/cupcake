@@ -49,5 +49,44 @@ public class OrderMapper {
         return orderlineList;
     }
 
+    public static int getTopPrice(int top_id, ConnectionPool connectionPool) throws DatabaseException {
+        int topPrice = 0; // Default value or error handling
 
+        String sql = "SELECT top_price FROM tops WHERE top_id = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, top_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    topPrice = rs.getInt("top_price");
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error in OrderMapper (getTopPrice): " + e.getMessage());
+        }
+
+        return topPrice;
+    }
+
+
+    public static int getBottomPrice(int bottom_id, ConnectionPool connectionPool) throws DatabaseException {
+        int bottomPrice = 0;
+
+        String sql = "SELECT bottom_price FROM bottoms WHERE bottom_id = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, bottom_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    bottomPrice = rs.getInt("bottom_price");
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error in OrderMapper (getBottomPrice): " + e.getMessage());
+        }
+
+        return bottomPrice;
+    }
 }

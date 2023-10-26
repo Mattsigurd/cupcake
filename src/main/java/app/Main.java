@@ -46,7 +46,7 @@ public class Main {
             int bottomId = Integer.parseInt(ctx.formParam("bottom_id"));
             int quantity = Integer.parseInt(ctx.formParam("quantity"));
             OrderController.addtocart(new Orderline(topId, bottomId, quantity), ctx);
-            ctx.redirect("/cart");
+            ctx.redirect("/order");
         });
     }
 }

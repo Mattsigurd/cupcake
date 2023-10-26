@@ -15,9 +15,7 @@ public class Bottoms {
     public Bottoms(String bottom) {
         this.bottom = bottom;
     }
-
-
-
+    
     public int getBottom_id() {
         return bottom_id;
     }
