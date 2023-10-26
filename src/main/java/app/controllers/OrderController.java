@@ -95,24 +95,6 @@ public class OrderController {
         cart.addToCart(orderLine);
         //ctx.redirect("/cart");
     }*/
-    public static void addtocart(Orderline orderline, Context ctx) throws DatabaseException {
-        User user = ctx.sessionAttribute("currentUser");
-        Cart cart = ctx.sessionAttribute("cart");
 
-        if (cart == null) {
-            cart = new Cart();
-            ctx.sessionAttribute("cart", cart);
-        }
-
-        int calculatedPrice = Calculator.calculateTotalPrice(orderline.getTop_id(), orderline.getBottom_id(), orderline.getQuantity(), ConnectionPool.getInstance());
-
-
-        orderline.setTotalPrice(calculatedPrice);
-
-        cart.addToCart(orderline);
-
-        //ctx.redirect("/cart");
-
-    }
 }
 

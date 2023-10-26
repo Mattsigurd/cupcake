@@ -14,17 +14,19 @@
 
     <div id="page-content">
         <header th:fragment="header(title)">
-            <img src="public/images/cupcakes.png" height="305" width="955"/>
+            <img src="images/cupcakes.png" height="305" width="955"/>
             <h1 th:text="${Indkøbskurv}"></h1>
         </header>
         <form action="/cart" method="post">
         <ol>
-            <li th:each="orderline : ${cartItems}">
-                <span th:text="${orderline.quantity + ' x ' + orderline.tops.top + ' med ' + orderline.bottoms.bottom + ' - samlet beløb: ' + orderline.totalPrice + ' kroner'}"></span>
+            <li th:each="orderline : ${#ctx.session.cart.cartItems}">
+                <span th:text="${orderline.quantity + ' x ' + orderline.tops.top + ' med ' + orderline.bottoms.bottom}"></span>
             </li>
         </ol>
             <button href="/payment">Til betaling</button>
         </form>
+
+        <p>Pris i alt: <span th:text="${#ctx.session.cart.gettotalprice}"></span></p>
 
         <footer th:fragment="footer">
             <a href="/order">Tilbage til bestillinger</a>

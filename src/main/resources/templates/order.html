@@ -20,26 +20,24 @@
 
         <form action="/order" method="post">
             <select name="top_id">
-                <option th:each="tops : ${#ctx.topsList}"
+                <option th:each="tops : ${#ctx.session.topsList}"
                         th:value="${tops.top_id}"
-                        th:text="${tops.top_id + tops.top + ' - cost: ' + tops.top_price + ' kroner'}"></option>
+                        th:text="${tops.top_id + tops.top + ' - beløb: ' + tops.top_price + ' kroner'}"></option>
             </select>
             <select name="bottom_id">
-                <option th:each="bottoms : ${#ctx.bottomsList}"
+                <option th:each="bottoms : ${#ctx.session.bottomsList}"
                         th:value="${bottoms.bottom_id}"
-                        th:text="${bottoms.bottom_id + bottoms.bottom + ' - cost: ' + bottoms.bottom_price + ' kroner'}"></option>
+                        th:text="${bottoms.bottom_id + bottoms.bottom + ' - beløb: ' + bottoms.bottom_price + ' kroner'}"></option>
             </select>
-            <form action="/calculate" method="post">
-                <label for="quantity">Quantity:</label>
-                <input type="number" name="quantity" id="quantity" value="1" min="1">
-                <button type="submit">Calculate</button>
-            </form>
+            <label for="quantity">Quantity:</label>
+            <input type="number" name="quantity" id="quantity" value="1" min="1">
+            <button type="submit" id="submit-button">Submit</button>
 
-            <button type="submit">Submit</button>
 
         </form>
-
-        <button type="submit" href="@{/cart}">Indkøbskurv</button>
+        <form method="get" action="/cart">
+         <button type="submit" th:href="@{/cart}">Indkøbskurv</button>
+        </form>
 
 
         <footer th:fragment="footer">

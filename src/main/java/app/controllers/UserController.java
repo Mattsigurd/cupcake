@@ -36,7 +36,7 @@ public class UserController
                 topsMap = TopMapper.getAllTops(connectionPool);
                 ctx.sessionAttribute("topsMap", topsMap);
                 List<Tops> topsList = new ArrayList<>(topsMap.values());
-                ctx.attribute("topsList", topsList);
+                ctx.sessionAttribute("topsList", topsList);
             }
             bottomsMap = (HashMap<Integer,  Bottoms>) ctx.sessionAttribute("bottomsMap");
 
@@ -46,7 +46,7 @@ public class UserController
                 bottomsMap = BottomMapper.getAllBottoms(connectionPool);
                 ctx.sessionAttribute("bottomsMap", bottomsMap);
                 List<Bottoms> bottomsList = new ArrayList<>(bottomsMap.values());
-                ctx.attribute("bottomsList", bottomsList);
+                ctx.sessionAttribute("bottomsList", bottomsList);
 
             }
             ctx.attribute("message", "Du er nu logget ind");

@@ -28,6 +28,14 @@ public class Orderline {
         this.totalPrice = totalPrice;
     }
 
+    public Orderline(int quantity, Tops tops, Bottoms bottoms, int top_id, int bottom_id) {
+        this.quantity = quantity;
+        this.tops = tops;
+        this.bottoms = bottoms;
+        this.top_id = top_id;
+        this.bottom_id = bottom_id;
+    }
+
     public Orderline(int quantity) {
         this.quantity = quantity;
 
