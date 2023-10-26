@@ -79,15 +79,32 @@ public class OrderMapper {
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Error in OrderMapper (getBottomPrice): " + e.getMessage());
+            throw new DatabaseException("Fejl i OrderMapper (getBottomPrice): " + e.getMessage());
         }
 
         return bottomPrice;
     }
 
+    public static int findOrderIdByUserId(int userId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT order_id FROM user_orders WHERE user_id = ?";
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, userId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getInt("order_id");
+                    } else {
+                        throw new DatabaseException("Ingen order fundet med brugeren " + userId);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Kan ikke connecte til DB i findOrderIdByUserId: " + e.getMessage());
+        }
+    }
 
     public static Orderline insertOrderline(Orderline orderline, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into orderline (id, order_id, quantity, top_id, bottom_id, total_price) values (?,?,?,?,?,?) where /user/.id=?";
+        String sql = "INSERT INTO orderline (id, order_id, quantity, top_id, bottom_id, total_price) VALUES (?,?,?,?,?,?)";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, orderline.getId());
@@ -97,12 +114,11 @@ public class OrderMapper {
                 ps.setInt(5, orderline.getBottom_id());
                 ps.setInt(6, orderline.getTotalPrice());
                 ps.executeUpdate();
-
             } catch (SQLException e) {
-                throw new DatabaseException("Error while executing SQL query: " + e.getMessage());
+                throw new DatabaseException("Fejl i insertOrderline med SQL query: " + e.getMessage());
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Error while connecting to the database: " + e.getMessage());
+            throw new DatabaseException("Fejl i insertOrderline med forbindelse til database: " + e.getMessage());
         }
         return orderline;
     }

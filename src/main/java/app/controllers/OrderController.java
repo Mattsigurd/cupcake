@@ -13,6 +13,7 @@ import io.javalin.http.Context;
 import java.util.ArrayList;
 import java.util.List;
 
+import static app.persistence.OrderMapper.findOrderIdByUserId;
 
 
 public class OrderController {
@@ -54,28 +55,31 @@ public class OrderController {
         }
     }
 
-        public static void createOrder(Context ctx, ConnectionPool connectionPool) {
-            User user = ctx.sessionAttribute("currentUser");
 
 
-            Cart cart = ctx.sessionAttribute("cart");
+    public static void createOrder(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        Cart cart = ctx.sessionAttribute("cart");
 
-            if (cart != null) {
-                List<Orderline> cartItems = cart.getCartItems();
+        if (cart != null) {
+            List<Orderline> cartItems = cart.getCartItems();
+            int userId = user.getId();
+
+            try {
+                int order_id = findOrderIdByUserId(userId, connectionPool);
+
                 for (Orderline orderline : cartItems) {
-
-                    orderline.setOrder_id(orderline.getOrder_id());
-                    try {
-                        Orderline insertedOrderline = OrderMapper.insertOrderline(orderline, connectionPool);
-
-                    } catch (DatabaseException e) {
-                        throw new RuntimeException(e);
-                    }
+                    orderline.setOrder_id(order_id);
+                    Orderline insertedOrderline = OrderMapper.insertOrderline(orderline, connectionPool);
                 }
+
                 cartItems.clear();
                 ctx.sessionAttribute("cart", cart);
 
                 ctx.redirect("/payment");
+            } catch (DatabaseException e) {
+                throw new RuntimeException(e);
             }
         }
     }
+}
