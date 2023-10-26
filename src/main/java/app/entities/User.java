@@ -5,9 +5,19 @@ public class User
     private int id;
     private String email;
     private String password;
+    private String role;
+    private double balance;
 
-    public User(int id, String email, String password)
+    public User(int id, String email, String password, String role, double balance)
     {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.role= role;
+        this.balance= balance;
+    }
+
+    public User(int id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -28,13 +38,20 @@ public class User
         return password;
     }
 
+    public String getRole() {
+        return role;
+    }
+    public double getBalance() {
+        return balance;
+    }
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", balance=" + balance +
                 '}';
     }
 }

@@ -13,9 +13,6 @@ public class Tops {
         this.top_price = top_price;
     }
 
-
-
-
     public int getTop_id() {
         return top_id;
     }
