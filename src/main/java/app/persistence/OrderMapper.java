@@ -87,7 +87,7 @@ public class OrderMapper {
 
 
     public static Orderline insertOrderline(Orderline orderline, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "insert into orderline (id, order_id, quantity, top_id, bottom_id, total_price) values (?,?,?,?,?,?)";
+        String sql = "insert into orderline (id, order_id, quantity, top_id, bottom_id, total_price) values (?,?,?,?,?,?) where /user/.id=?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, orderline.getId());

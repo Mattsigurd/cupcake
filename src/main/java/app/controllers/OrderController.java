@@ -18,8 +18,6 @@ import java.util.List;
 public class OrderController {
 
 
-
-
         public void deleteOrderlines(Orderline orderline, Context ctx) {
 
             User user = ctx.sessionAttribute("currentUser");
