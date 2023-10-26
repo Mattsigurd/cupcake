@@ -5,14 +5,9 @@ import app.model.Bottoms;
 import app.model.Orderline;
 import app.model.Tops;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class OrderMapper {
 
@@ -88,5 +83,27 @@ public class OrderMapper {
         }
 
         return bottomPrice;
+    }
+
+
+    public static Orderline insertOrderline(Orderline orderline, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "insert into orderline (id, order_id, quantity, top_id, bottom_id, total_price) values (?,?,?,?,?,?)";
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, orderline.getId());
+                ps.setInt(2, orderline.getOrder_id());
+                ps.setInt(3, orderline.getQuantity());
+                ps.setInt(4, orderline.getTop_id());
+                ps.setInt(5, orderline.getBottom_id());
+                ps.setInt(6, orderline.getTotalPrice());
+                ps.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new DatabaseException("Error while executing SQL query: " + e.getMessage());
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error while connecting to the database: " + e.getMessage());
+        }
+        return orderline;
     }
 }

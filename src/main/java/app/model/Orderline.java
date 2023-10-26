@@ -3,7 +3,7 @@ package app.model;
 
 public class Orderline {
     private int id;
-    private int orderID;
+    private int order_id;
     private int quantity;
     Tops tops;
     Bottoms bottoms;
@@ -19,9 +19,9 @@ public class Orderline {
         this.bottom_id = bottom_id;
         this.quantity = quantity;
     }
-    public Orderline(int id, int orderID, int quantity, Tops tops, Bottoms bottoms, int totalPrice) {
+    public Orderline(int id, int order_id, int quantity, Tops tops, Bottoms bottoms, int totalPrice) {
         this.id = id;
-        this.orderID = orderID;
+        this.order_id = order_id;
         this.quantity = quantity;
         this.tops = tops;
         this.bottoms = bottoms;
@@ -39,6 +39,10 @@ public class Orderline {
     public Orderline(int quantity) {
         this.quantity = quantity;
 
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 
     public int getTop_id() {
@@ -65,8 +69,8 @@ public class Orderline {
         return id;
     }
 
-    public int getOrderID() {
-        return orderID;
+    public int getOrder_id() {
+        return order_id;
     }
 
     public int getQuantity() {
@@ -94,7 +98,7 @@ public class Orderline {
     public String toString() {
         return "Orderline{" +
                 "id=" + id +
-                ", orderID=" + orderID +
+                ", orderID=" + order_id +
                 ", quantity=" + quantity +
                 ", tops=" + tops +
                 ", bottoms=" + bottoms +

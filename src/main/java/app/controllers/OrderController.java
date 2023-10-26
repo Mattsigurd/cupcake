@@ -8,7 +8,6 @@ import app.model.Orderline;
 import app.model.Tops;
 import app.persistence.*;
 import io.javalin.http.Context;
-import app.persistence.Calculator;
 
 
 import java.util.ArrayList;
@@ -38,9 +37,8 @@ public class OrderController {
     public static void allTops(Context ctx, ConnectionPool connectionPool) {
 
         try {
-            List<Tops> topsList = (List<Tops>) TopMapper.getAllTops(connectionPool);
+            List<Tops> topsList = new ArrayList<>(TopMapper.getAllTops(connectionPool).values());
             ctx.attribute("topsList", topsList);
-            ctx.render("order.html");
         } catch (DatabaseException e) {
             throw new RuntimeException(e);
         }
@@ -50,51 +48,36 @@ public class OrderController {
     public static void allBottoms(Context ctx, ConnectionPool connectionPool) {
 
         try {
-            List<Bottoms> bottomsList = (List<Bottoms>) BottomMapper.getAllBottoms(connectionPool);
+            List<Bottoms> bottomsList =  new ArrayList<>( BottomMapper.getAllBottoms(connectionPool).values());
             ctx.attribute("Bottoms", bottomsList);
-            ctx.render("order.html");
+
         } catch (DatabaseException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static void createOrder(Context ctx) {
-        User user = ctx.sessionAttribute("currentUser");
+        public static void createOrder(Context ctx, ConnectionPool connectionPool) {
+            User user = ctx.sessionAttribute("currentUser");
 
 
-        int topId = Integer.parseInt(ctx.formParam("top_id"));
-        int bottomId = Integer.parseInt(ctx.formParam("bottom_id"));
-        int quantity = Integer.parseInt(ctx.formParam("quantity"));
+            Cart cart = ctx.sessionAttribute("cart");
 
-        Orderline orderline = new Orderline(topId, bottomId, quantity);
+            if (cart != null) {
+                List<Orderline> cartItems = cart.getCartItems();
+                for (Orderline orderline : cartItems) {
 
-        Cart cart = ctx.sessionAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
-            ctx.sessionAttribute("cart", cart);
+                    orderline.setOrder_id(orderline.getOrder_id());
+                    try {
+                        Orderline insertedOrderline = OrderMapper.insertOrderline(orderline, connectionPool);
+
+                    } catch (DatabaseException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                cartItems.clear();
+                ctx.sessionAttribute("cart", cart);
+
+                ctx.redirect("/payment");
+            }
         }
-        cart.addToCart(orderline);
-        ctx.redirect("/order");
     }
-
-    /*public static void addtocart(Orderline orderline, Context ctx){
-
-        User user = ctx.sessionAttribute("currentUser");
-        Cart cart = ctx.sessionAttribute("cart");
-        int topId = Integer.parseInt(ctx.formParam("top_id"));
-        int bottomId = Integer.parseInt(ctx.formParam("bottom_id"));
-        int quantity = Integer.parseInt(ctx.formParam("quantity"));
-
-        Orderline orderLine = new Orderline(topId, bottomId, quantity);
-
-        if (cart == null) {
-            cart = new Cart();
-            ctx.sessionAttribute("cart", cart);
-        }
-
-        cart.addToCart(orderLine);
-        //ctx.redirect("/cart");
-    }*/
-
-}
-

@@ -21,7 +21,6 @@ public class Main {
     private static final ConnectionPool connectionPool = ConnectionPool.getInstance(USER, PASSWORD, URL, DB);
 
 
-
     public static void main(String[] args) {
         // Initializing Javalin and Jetty webserver
 
@@ -35,16 +34,19 @@ public class Main {
         app.get("/", ctx -> ctx.render("index.html"));
         app.post("/login", ctx -> UserController.login(ctx, connectionPool));
         app.get("/createuser", ctx -> ctx.render("createuser.html"));
-        app.post("/createuser",ctx -> UserController.createuser(ctx, connectionPool ));
+        app.post("/createuser", ctx -> UserController.createuser(ctx, connectionPool));
         app.get("/logout", ctx -> UserController.logout(ctx));
         app.get("/order", ctx -> {
             OrderController.allTops(ctx, connectionPool);
             OrderController.allBottoms(ctx, connectionPool);
+            ctx.render("order.html");
         });
         app.post("/order", ctx -> CartController.addtocart(ctx));
 
-        app.get("/cart", ctx ->  ctx.render("cart.html"));
-       // app.post("/cart", ctx-> OrderController.createOrder(ctx));
-
+        app.get("/cart", ctx -> ctx.render("cart.html"));
+        app.get("/payment", ctx -> {
+            OrderController.createOrder(ctx, connectionPool);
+            ctx.render("payment.html");
+        });
     }
 }
