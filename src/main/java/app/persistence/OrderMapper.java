@@ -86,7 +86,7 @@ public class OrderMapper {
     }
 
     public static int findOrderIdByUserId(int userId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT order_id FROM user_orders WHERE user_id = ?";
+        String sql = "SELECT order_id FROM orders WHERE user_id = ?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, userId);
@@ -126,7 +126,7 @@ public class OrderMapper {
     public static int registerBalance(int user_id , ConnectionPool connectionPool) throws DatabaseException {
         int remainingBalance = 0;
 
-        String sql = "SELECT user.balance WHERE user.id = ?";
+        String sql = "SELECT \"user\".balance WHERE \"user\".id = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {

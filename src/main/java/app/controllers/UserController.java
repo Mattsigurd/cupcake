@@ -72,7 +72,7 @@ public class UserController
         {
             try
             {
-                UserMapper.createuser(name, password1, connectionPool);
+                UserMapper.createuser(name, password1, role, connectionPool);
                 ctx.attribute("message", "Du er nu oprette. Log på for at komme i gang.");
                 ctx.render("index.html");
 
