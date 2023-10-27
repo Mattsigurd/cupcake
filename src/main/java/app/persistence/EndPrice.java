@@ -14,5 +14,13 @@ public class EndPrice {
             return false;
     }
 }
-    
+
+    public static String toString(boolean canComplete) {
+        if (canComplete) {
+            return "Your order has been confirmed ;)";
+        } else {
+            return "Insufficient funds Unfortunately :(.";
+        }
+    }
 }
+
