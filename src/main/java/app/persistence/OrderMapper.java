@@ -122,4 +122,24 @@ public class OrderMapper {
         }
         return orderline;
     }
+
+    public static int registerBalance(int user_id , ConnectionPool connectionPool) throws DatabaseException {
+        int remainingBalance = 0;
+
+        String sql = "SELECT user.balance WHERE user.id = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, user_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    remainingBalance = rs.getInt("balance");
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Error in OrderMapper (getBalance): " + e.getMessage());
+        }
+
+        return remainingBalance;
+    }
 }
