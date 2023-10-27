@@ -13,13 +13,21 @@
 <div id="page-container">
 
     <div id="page-content">
-        <header th:fragment="header(title)">
+        <header th:fragment="Cupcake">
             <img src="images/cupcakes.png" height="305" width="955"/>
-            <h1 th:text="${title}"></h1>
+            <h1 th:text="${Betaling}"></h1>
         </header>
 
+        <form action="/payment" method="post">
+            <select name="orderlineList">
+                <option th:each="orderlines : ${#ctx.session.orderlineList}"
+                        th:value="${orderlines.order_id}"
+                        th:text="${orderlines.order_id + tops.top_id + tops.top+ tops.top_price+
+                        bottoms.bottom_id+ bottoms.bottom+ bottoms.bottom_price + orderline.quantity+ orderline.total_price}"></option>
+            </select>
+        </form>
         <footer th:fragment="footer">
-            <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Create account</a>
+
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
             <a href="/">Home</a>
         </footer>
