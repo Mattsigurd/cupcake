@@ -11,11 +11,11 @@ import java.util.List;
 
 public class OrderMapper {
 
-    private List<Orderline> getAllOrderLines(ConnectionPool connectionPool) throws DatabaseException {
+    public static List<Orderline> getAllOrderLines(ConnectionPool connectionPool) throws DatabaseException {
         List<Orderline> orderlineList = new ArrayList<>();
         String sql = "SELECT orderline.id, orderline.order_id, orderline.quantity, tops.top, tops.top_id, " +
                 " tops.top_price as top_price, bottoms.bottom, bottoms.bottom_id, bottoms.bottom_price as bottom_price, " +
-                "orderline.total_price FROM orderline JOIN tops ON orderline.top_id = tops.top_id JOIN bottoms ON orderline.bottom_id = bottoms.bottom_id";
+                "orderline.total_price FROM orderline JOIN tops ON orderline.top_id = tops.top_id JOIN bottoms ON orderline.bottom_id = bottoms.bottom_id where orderline.user_id = :currentUser";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
