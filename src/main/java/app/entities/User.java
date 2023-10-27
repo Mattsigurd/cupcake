@@ -16,7 +16,12 @@ public class User
     private String role;
     private double balance;
 
-    public User(int id, String email, String password, String role, double balance)
+    public User(int id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+    }
+   public User(int id, String email, String password, String role, double balance)
     {
         this.id = id;
         this.email = email;
@@ -25,21 +30,25 @@ public class User
         this.balance= balance;
     }
 
-    public User(int id, String email, String password) {
+    public User(int id, String email, String password, String role) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
@@ -61,23 +70,24 @@ public class User
     }
 
 
-
-    public static String findAdministratorByRole(String userId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT order_id FROM user_orders WHERE user_id = ?";
+    /*
+    public static String findOrderIdByRole(String userId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT order_id FROM orders WHERE user_id = ?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1, userId);
+                ps.setInt(1, findOrderIdByRole());
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        return rs.getString("role");
+                        return rs.getString("order_id");
                     } else {
-                        throw new DatabaseException("Ingen role fundet med brugeren " + userId);
+                        throw new DatabaseException("Ingen order fundet med brugeren " + userId);
                     }
                 }
             }
         } catch (SQLException e) {
-            throw new DatabaseException("Kan ikke connecte til DB i findAdministratorByRole: " + e.getMessage());
+            throw new DatabaseException("Kan ikke connecte til DB i findOrderIdByRole: " + e.getMessage());
         }
     }
 
+     */
 }

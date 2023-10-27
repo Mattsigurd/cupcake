@@ -85,8 +85,8 @@ public class OrderController {
     public static void allOrderline(Context ctx, ConnectionPool connectionPool) throws DatabaseException{
 
         try {
-            List<Orderline> orderlineList=  OrderMapper.getAllOrderLines(connectionPool);
-            ctx.attribute("orderlineList", orderlineList);
+            List<Orderline> orderlineArrayList=  new ArrayList<>(OrderMapper.getAllOrderLines(connectionPool));
+            ctx.attribute("Orderline", orderlineArrayList);
 
         } catch (DatabaseException e) {
             throw new RuntimeException(e);

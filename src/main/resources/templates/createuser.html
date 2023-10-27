@@ -8,15 +8,14 @@
 <div id="page-container">
 
     <div id="page-content">
-        <div th:replace="~{fragments :: header('Create account')}"></div>
+        <div th:replace="~{fragments :: header('Opret konto')}"></div>
         <p>Indtast venligst brugerinfo:</p>
         <div class="centered-form">
             <form method="post">
 
-                <input type="text" name="username" placeholder="username"/>
+                <input type="text" name="email" placeholder="email"/>
                 <input type="password" name="password1" placeholder="password"/>
                 <input type="password" name="password2" placeholder="gentag password"/>
-                <input type="text" name="role" placeholder="Kunde"/>
                 <button type="submit" formaction="/createuser">Opret bruger</button>
 
                 <p class="errormessage" th:text="${#ctx.message}"></p>

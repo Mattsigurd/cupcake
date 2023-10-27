@@ -19,13 +19,23 @@
         </header>
 
         <form action="/payment" method="post">
-            <select name="orderlineList">
-                <option th:each="orderlines : ${#ctx.session.orderlineList}"
-                        th:value="${orderlines.order_id}"
-                        th:text="${orderlines.order_id + tops.top_id + tops.top+ tops.top_price+
-                        bottoms.bottom_id+ bottoms.bottom+ bottoms.bottom_price + orderline.quantity+ orderline.total_price}"></option>
-            </select>
+            <ol>
+                <li th:each="orderline : ${orderlineArrayList}">
+
+                    <span th:text="${'Order ID: ' + orderline.order_id +
+                    ', Top ID: ' + orderline.top_id +
+                    ', Top: ' + orderline.top +
+                    ', Top pris: ' + orderline.top_price +
+                    ', Bund ID: ' + orderline.bottom_id +
+                    ', Bund: ' + orderline.bottom +
+                    ', Bund pris: ' + orderline.bottom_price +
+                    ', Antal: ' + orderline.quantity +
+                    ', Totale beløb: ' + orderline.total_price}"></span>
+
+                </li>
+            </ol>
         </form>
+
         <footer th:fragment="footer">
 
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
