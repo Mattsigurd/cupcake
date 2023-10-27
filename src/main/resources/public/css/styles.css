@@ -5,7 +5,7 @@ body{
     margin:0;
     padding:0;
     font-family:sans-serif;
-    background-color: #F5F5F5;
+    background:url("https://github.com/Mattsigurd/cupcake/blob/f54f458936fd8ba431e016406b9b4e9cf3682d48/src/main/resources/public/images/stainedGlass.png");
     background-size: cover;
     background-repeat: no-repeat;
     display:flex;
@@ -16,7 +16,6 @@ body{
     display: flex;
     flex-direction: column;
     -webkit-justify-content: space-around;
-
     align-items: flex-start;
     width: 90%;
     height: 950px;
@@ -24,7 +23,7 @@ body{
     border-color: #FF6968;
     border: 3px;
     border-radius: 16px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
     .boxes{
        display: flex;
@@ -39,7 +38,7 @@ body{
 
 
     .flex-box1{
-        background-image:linear-gradient(to right,#6A359C,#9969C7);
+        background: linear-gradient(to bottom, #ff1493, #ffb6c1);
         padding:20em;
         width: 30%;
         height: 97%;
@@ -50,12 +49,12 @@ body{
 
     }
 .flex-box2{
-    background-image:linear-gradient(to right,#6A359C,#9969C7);
+    background-color:#f0f8ff;
     padding:5em;
     width:65%;
     height: 97%;
-    border:3px;
-    border-color: black;
+    border:3px solid;
+    border-color:#ff1493;
     border-radius: 9px;
     padding: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -68,6 +67,7 @@ body{
 .header{
     display: flex;
     border: 1px solid;
+    border-color: black;
     border-radius:16px;
     flex-direction: column;
     align-items: center;
@@ -80,11 +80,11 @@ body{
 }
 
 .big_head {
-    background-image: linear-gradient(to bottom right, #6A359C, #9969C7);
+    background-color:#f0f8ff;
     width: 99%;
     height: 75%;
-    border: 1px;
-    border-color: black;
+    border: 3px solid;
+    border-color:#ff1493;
     border-radius: 9px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -92,7 +92,7 @@ body{
 
 
 .small_head {
-    background-image: linear-gradient(to bottom right, #6A359C, #9969C7);
+    background: linear-gradient(to bottom, #ff1493, #ffb6c1);
     width: 99%;
     height: 20%;
     border: 1px;
