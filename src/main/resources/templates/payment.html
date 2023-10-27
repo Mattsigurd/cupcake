@@ -21,12 +21,17 @@
         <form action="/payment" method="post">
             <ol>
                 <li th:each="orderline : ${orderlineArrayList}">
-                        th:value="${orderline.order_id}"
-                        th:text="${'Order ID: ' + orderline.order_id + ', Top ID: ' + orderline.top_id +
-                        ', Top: ' + orderline.top + ', Top pris: ' + orderline.top_price +
-                        ', Bund ID: ' + orderline.bottom_id + ', Bund: ' + orderline.bottom +
-                        ', Bund pris: ' + orderline.bottom_price + ', Antal: ' + orderline.quantity +
-                        ', Totale beløb: ' + orderline.total_price}">
+
+                    <span th:text="${'Order ID: ' + orderline.order_id +
+                    ', Top ID: ' + orderline.top_id +
+                    ', Top: ' + orderline.top +
+                    ', Top pris: ' + orderline.top_price +
+                    ', Bund ID: ' + orderline.bottom_id +
+                    ', Bund: ' + orderline.bottom +
+                    ', Bund pris: ' + orderline.bottom_price +
+                    ', Antal: ' + orderline.quantity +
+                    ', Totale beløb: ' + orderline.total_price}"></span>
+
                 </li>
             </ol>
         </form>
