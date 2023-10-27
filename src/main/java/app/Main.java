@@ -46,6 +46,7 @@ public class Main {
         app.get("/cart", ctx -> ctx.render("cart.html"));
         app.get("/payment", ctx -> {
             OrderController.createOrder(ctx, connectionPool);
+            OrderMapper.getAllOrderLines(connectionPool);
             ctx.render("payment.html");
         });
     }
