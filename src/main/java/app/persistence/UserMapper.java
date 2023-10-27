@@ -12,21 +12,21 @@ import java.sql.SQLException;
 public class UserMapper
 {
 
-    public static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException
+    public static User login(String name, String password, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "select * from \"user\" where email=? and password=?";
+        String sql = "select * from \"user\" where name=? and password=?";
 
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setString(1, email);
+                ps.setString(1, name);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next())
                 {
                     int id = rs.getInt("id");
-                    return new User(id, email, password);
+                    return new User(id, name, password);
                 } else
                 {
                     throw new DatabaseException("Fejl i login. Prøv igen.");
@@ -41,17 +41,16 @@ public class UserMapper
 
     }
 
-    public static void createuser(String email, String password,  String role, ConnectionPool connectionPool) throws DatabaseException
+    public static void createuser(String name, String password, ConnectionPool connectionPool) throws DatabaseException
     {
-        String sql = "insert into \"user\" (email, password, role) values (?,?)";
+        String sql = "insert into \"user\" (name, password) values (?,?)";
 
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setString(1, email);
+                ps.setString(1, name);
                 ps.setString(2, password);
-                ps.setString(3, role);
                 int rowsAffected =  ps.executeUpdate();
                 if (rowsAffected != 1)
                 {
