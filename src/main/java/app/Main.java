@@ -49,5 +49,15 @@ public class Main {
             OrderController.allOrderline(ctx, connectionPool);
             ctx.render("payment.html");
         });
+
+        /*    Et bud på hvordan der kan bruges toString at vis at ordret er blevet udført
+        try {
+        boolean canComplete = EndPrice.canCompleteOrder(userId, connectionPool);
+
+        String OrderMessage = EndPrice.toString(canComplete);
+        System.out.println(OrderMessage);
+        } catch (DatabaseException e) {
+         System.out.println("An error occurred. Please try again later.");
+        }*/
     }
 }
