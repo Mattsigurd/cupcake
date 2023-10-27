@@ -19,15 +19,16 @@
         </header>
 
         <form action="/payment" method="post">
-            <select name="order_id">
-                <option th:each="orderline : ${orderlineArrayList}"
+            <ol>
+                <li th:each="orderline : ${orderlineArrayList}">
                         th:value="${orderline.order_id}"
                         th:text="${'Order ID: ' + orderline.order_id + ', Top ID: ' + orderline.top_id +
-                        ', Top: ' + orderline.top + ', Top Price: ' + orderline.top_price +
-                        ', Bottom ID: ' + orderline.bottom_id + ', Bottom: ' + orderline.bottom +
-                        ', Bottom Price: ' + orderline.bottom_price + ', Quantity: ' + orderline.quantity +
-                        ', Total Price: ' + orderline.total_price}"></option>
-            </select>
+                        ', Top: ' + orderline.top + ', Top pris: ' + orderline.top_price +
+                        ', Bund ID: ' + orderline.bottom_id + ', Bund: ' + orderline.bottom +
+                        ', Bund pris: ' + orderline.bottom_price + ', Antal: ' + orderline.quantity +
+                        ', Totale beløb: ' + orderline.total_price}">
+                </li>
+            </ol>
         </form>
 
         <footer th:fragment="footer">
