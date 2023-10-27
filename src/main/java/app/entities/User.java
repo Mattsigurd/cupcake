@@ -63,7 +63,7 @@ public class User
 
 
     public static String findAdministratorByRole(String userId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT order_id FROM user_orders WHERE user_id = ?";
+        String sql = "SELECT order_id FROM orders WHERE user_id = ?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, userId);
