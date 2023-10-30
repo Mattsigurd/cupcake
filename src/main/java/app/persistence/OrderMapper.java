@@ -85,16 +85,16 @@ public class OrderMapper {
         return bottomPrice;
     }
 
-    public static int findOrderIdByUserId(int userId, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "SELECT order_id FROM orders WHERE user_id = ?";
+    public static int findOrderIdByUserId(int user_id, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "SELECT orders.id FROM orders WHERE user_id = ?";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, userId);
+                ps.setInt(1, user_id);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        return rs.getInt("order_id");
+                        return rs.getInt("id");
                     } else {
-                        throw new DatabaseException("Ingen order fundet med brugeren " + userId);
+                        throw new DatabaseException("Ingen order fundet med brugeren " + user_id);
                     }
                 }
             }
