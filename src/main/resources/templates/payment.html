@@ -20,9 +20,15 @@
 
         <form  method="post">
             <ol>
-                <li th:each="orderline : ${orderlineArrayList}" text="${'Top ID: ' + orderline.top_id +
-                    ', Top: ' + orderline.top +
-                    ', Top pris: ' + orderline.top_price}">
+                <li th:each="orderline : ${orderlineArrayList}">
+                    <span th:text="'Top ID: ' + ${orderline.top_id}','"></span>
+                    <span th:text="'Top: ' + ${orderline.tops.top}','"></span>
+                    <span th:text="'Top pris: ' + ${orderline.tops.top_price}','"></span>
+                    <span th:text="'Bottom ID: ' + ${orderline.bottom_id}','"></span>
+                    <span th:text="'Bottom: ' + ${orderline.bottoms.bottom}','"></span>
+                    <span th:text="'Bottom pris: ' + ${orderline.bottoms.bottom_price}','"></span>
+                    <span th:text="'Antal: ' + ${orderline.quantity}','"></span>
+                    <span th:text="'Samlet pris: ' + ${orderline.totalPrice}"></span>
                 </li>
             </ol>
             <button type="submit" formaction="/createorder">Genenmfør betaling</button>
