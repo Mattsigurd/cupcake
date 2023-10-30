@@ -161,7 +161,7 @@ public class OrderMapper {
                 ps.setInt(2, orderline.getQuantity());
                 ps.setInt(3, orderline.getTop_id());
                 ps.setInt(4, orderline.getBottom_id());
-                ps.setInt(5, orderline.getTotalPrice());
+                ps.setDouble(5, orderline.getTotalPrice());
                 ps.executeUpdate();
             } catch (SQLException e) {
                 throw new DatabaseException("Fejl i insertOrderline med SQL query: " + e.getMessage());

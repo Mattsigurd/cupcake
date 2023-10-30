@@ -86,8 +86,12 @@ public class Orderline {
         return bottoms;
     }
 
-    public int getTotalPrice() {
-        return totalPrice;
+    public double getTotalPrice() {
+        if (tops != null && bottoms != null) {
+            return quantity * (tops.getTop_price() + bottoms.getBottom_price());
+        } else {
+            return 0; // Return 0 if tops or bottoms are not set
+        }
     }
 
     public void setTotalPrice(int totalPrice) {
@@ -102,7 +106,6 @@ public class Orderline {
                 ", quantity=" + quantity +
                 ", tops=" + tops +
                 ", bottoms=" + bottoms +
-                ", totalPrice=" + totalPrice +
                 '}';
     }
 
