@@ -1,7 +1,8 @@
 package app.model;
 
-import app.persistence.Calculator;
+import app.entities.User;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,5 +32,21 @@ public class Cart {
         }
 
         return sum;
+    }
+
+    public Orders createOrders(User user) {
+        Date orderDate = new Date(System.currentTimeMillis());
+        Orders orders = new Orders(user.getId(), orderDate, false, user.getId());
+        return orders;
+    }
+
+    public List<Orderline> moveCartItemsToOrderlines(Orders orders) {
+        List<Orderline> orderlines = new ArrayList<>();
+        for (Orderline item : cartItems) {
+            item.setOrder_id(orders.getId());
+            orderlines.add(item);
+        }
+        cartItems.clear();
+        return orderlines;
     }
 }

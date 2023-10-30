@@ -2,19 +2,16 @@ package app.controllers;
 
 import app.entities.User;
 import app.exceptions.DatabaseException;
-import app.model.Bottoms;
-import app.model.Cart;
-import app.model.Orderline;
-import app.model.Tops;
+import app.model.*;
 import app.persistence.*;
 import io.javalin.http.Context;
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import static app.persistence.OrderMapper.findOrderIdByUserId;
-import static app.persistence.OrderMapper.findUserIdByCurrentUser;
 
 
 public class OrderController {
@@ -56,38 +53,23 @@ public class OrderController {
         }
     }
 
-
-
-    public static void createOrder(Context ctx, ConnectionPool connectionPool) {
-        User user = ctx.sessionAttribute("currentUser");
+    public static void createOrders(Context ctx, ConnectionPool connectionPool) {
         Cart cart = ctx.sessionAttribute("cart");
-
         if (cart != null) {
-            List<Orderline> cartItems = cart.getCartItems();
-            int userId = user.getId();
-
-            try {
-                int order_id = findOrderIdByUserId(userId, connectionPool);
-
-                for (Orderline orderline : cartItems) {
-                    orderline.setOrder_id(order_id);
-                    Orderline insertedOrderline = OrderMapper.insertOrderline(orderline, connectionPool);
-                }
-
-                cartItems.clear();
-                ctx.sessionAttribute("cart", cart);
-
-                ctx.redirect("/payment");
-            } catch (DatabaseException e) {
-                throw new RuntimeException(e);
-            }
+            ctx.attribute("orderlineArrayList", cart.getCartItems());
+            ctx.render("payment.html");
         }
     }
-    public static void allOrderline(Context ctx, ConnectionPool connectionPool) throws DatabaseException{
 
+    public static void allOrderline(Context ctx, ConnectionPool connectionPool) throws DatabaseException
+    {
+        User user = (User) ctx.sessionAttribute("currentUser");
+        Cart cart = (Cart) ctx.sessionAttribute("cart");
+
+        Orders orders = new Orders(0, new Date(System.currentTimeMillis()), true, user.getId()  );
         try {
-            List<Orderline> orderlineArrayList=  new ArrayList<>(OrderMapper.getAllOrderLines(connectionPool));
-            ctx.attribute("Orderline", orderlineArrayList);
+            orders = OrderMapper.insertOrders(orders, cart.getCartItems(), connectionPool );
+            ctx.render("index.html");
 
         } catch (DatabaseException e) {
             throw new RuntimeException(e);

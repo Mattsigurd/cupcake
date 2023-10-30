@@ -13,23 +13,15 @@
 <div id="page-container">
 
     <div id="page-content">
-        <header th:fragment="Cupcake">
+        <header th:fragment="header(title)">
             <img src="images/cupcakes.png" height="305" width="955"/>
-            <h1 th:text="${Betaling}"></h1>
+            <h1 th:text="${title}"></h1>
         </header>
 
-        <form  method="post">
-            <ol>
-                <li th:each="orderline : ${orderlineArrayList}" text="${'Top ID: ' + orderline.top_id +
-                    ', Top: ' + orderline.top +
-                    ', Top pris: ' + orderline.top_price}">
-                </li>
-            </ol>
-            <button type="submit" formaction="/createorder">Genenmfør betaling</button>
-        </form>
+
+
 
         <footer th:fragment="footer">
-
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
             <a href="/">Home</a>
         </footer>

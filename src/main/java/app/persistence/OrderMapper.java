@@ -1,8 +1,10 @@
 package app.persistence;
 
+import app.controllers.OrderController;
 import app.exceptions.DatabaseException;
 import app.model.Bottoms;
 import app.model.Orderline;
+import app.model.Orders;
 import app.model.Tops;
 
 import java.sql.*;
@@ -123,16 +125,43 @@ public class OrderMapper {
         }
     }
 
-    public static Orderline insertOrderline(Orderline orderline, ConnectionPool connectionPool) throws DatabaseException {
-        String sql = "INSERT INTO orderline (id, order_id, quantity, top_id, bottom_id, total_price) VALUES (?,?,?,?,?,?)";
+    public static Orders insertOrders(Orders orders, List<Orderline> orderlines, ConnectionPool connectionPool) throws DatabaseException{
+        String sql = "INSERT INTO orders (date, paid, user_id) VALUES (?,?,?)";
+        int newOrderId = 0;
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setDate(1, orders.getDate());
+                ps.setBoolean(2, orders.isPaid());
+                ps.setInt(3, orders.getUser_id());
+                int rowsAffected = ps.executeUpdate();
+
+                // Hent det nye id for ordren
+                if (rowsAffected == 1)
+                {
+                    ResultSet keys = ps.getGeneratedKeys();
+                    keys.next();
+                    newOrderId = keys.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            throw new DatabaseException("Fejl i insertOrders med SQL query: " + e.getMessage());
+    }
+        for (Orderline orderline : orderlines) {
+            insertOrderline(orderline, newOrderId, connectionPool);
+        }
+
+        return orders;
+    }
+
+    public static Orderline insertOrderline(Orderline orderline, int orderId, ConnectionPool connectionPool) throws DatabaseException {
+        String sql = "INSERT INTO orderline (order_id, quantity, top_id, bottom_id, total_price) VALUES (?,?,?,?,?)";
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, orderline.getId());
-                ps.setInt(2, orderline.getOrder_id());
-                ps.setInt(3, orderline.getQuantity());
-                ps.setInt(4, orderline.getTop_id());
-                ps.setInt(5, orderline.getBottom_id());
-                ps.setInt(6, orderline.getTotalPrice());
+                ps.setInt(1, orderId);
+                ps.setInt(2, orderline.getQuantity());
+                ps.setInt(3, orderline.getTop_id());
+                ps.setInt(4, orderline.getBottom_id());
+                ps.setInt(5, orderline.getTotalPrice());
                 ps.executeUpdate();
             } catch (SQLException e) {
                 throw new DatabaseException("Fejl i insertOrderline med SQL query: " + e.getMessage());
@@ -140,6 +169,7 @@ public class OrderMapper {
         } catch (SQLException e) {
             throw new DatabaseException("Fejl i insertOrderline med forbindelse til database: " + e.getMessage());
         }
+
         return orderline;
     }
 

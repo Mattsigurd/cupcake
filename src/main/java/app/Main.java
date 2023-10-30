@@ -4,10 +4,9 @@ import app.controllers.CartController;
 import app.controllers.OrderController;
 import app.controllers.UserController;
 import app.model.Cart;
-import app.model.Orderline;
+import app.model.Orders;
 import app.persistence.ConnectionPool;
 import app.persistence.OrderMapper;
-import app.persistence.Quantity;
 import config.ThymeleafConfig;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinThymeleaf;
@@ -44,11 +43,8 @@ public class Main {
         });
         app.post("/order", ctx -> CartController.addtocart(ctx));
         app.get("/cart", ctx -> ctx.render("cart.html"));
-        app.get("/payment", ctx -> {
-            OrderController.createOrder(ctx, connectionPool);
-            OrderController.allOrderline(ctx, connectionPool);
-            ctx.render("payment.html");
-        });
+        app.get("/payment", ctx -> OrderController.createOrders(ctx, connectionPool));
+        app.post("/createorder", ctx -> OrderController.allOrderline(ctx, connectionPool));
 
         /*    Et bud på hvordan der kan bruges toString at vis at ordret er blevet udført
         try {
