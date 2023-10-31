@@ -69,7 +69,7 @@ public class OrderController {
         Orders orders = new Orders(0, new Date(System.currentTimeMillis()), true, user.getId()  );
         try {
             orders = OrderMapper.insertOrders(orders, cart.getCartItems(), connectionPool );
-            ctx.render("index.html");
+            ctx.render("order.html");
 
         } catch (DatabaseException e) {
             throw new RuntimeException(e);
