@@ -20,7 +20,7 @@
         <form action="/cart" method="post">
         <ol>
             <li th:each="orderline : ${#ctx.session.cart.cartItems}">
-                <span th:text="${orderline.quantity + ' x ' + orderline.tops.top + ' med ' + orderline.bottoms.bottom}"></span>
+                <span th:text="${orderline.quantity + ' x ' + orderline.tops.top + ' top med ' + orderline.bottoms.bottom} + ' bund'"></span>
             </li>
         </ol>
 

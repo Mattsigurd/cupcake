@@ -22,12 +22,12 @@
             <select name="top_id">
                 <option th:each="tops : ${#ctx.session.topsList}"
                         th:value="${tops.top_id}"
-                        th:text="${tops.top_id + ' ' +tops.top + ' - beløb: ' + tops.top_price + ' kroner'}"></option>
+                        th:text="'Top '+ ${tops.top_id + ' ' +tops.top + ' - beløb: ' + tops.top_price + ' kroner'}"></option>
             </select>
             <select name="bottom_id">
                 <option th:each="bottoms : ${#ctx.session.bottomsList}"
                         th:value="${bottoms.bottom_id}"
-                        th:text="${bottoms.bottom_id + ' '+ bottoms.bottom + ' - beløb: ' + bottoms.bottom_price + ' kroner'}"></option>
+                        th:text="'Bund '+${bottoms.bottom_id + ' '+ bottoms.bottom + ' - beløb: ' + bottoms.bottom_price + ' kroner'}"></option>
             </select>
             <label for="quantity">Antal:</label>
             <input type="number" name="quantity" id="quantity" value="1" min="1">
