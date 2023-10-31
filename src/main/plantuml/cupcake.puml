@@ -17,7 +17,6 @@ bestillinger --> indkøbskurv : går til indkøbskurvcart
 indkøbskurv --> bestillinger : tilbage til bestillinger
 indkøbskurv --> betaling : til betaling
 betaling --> bestillinger : betaling gennemført
-betaling --> logUd
 bestillinger --> logUd
 startside --> logUd : log ud
 
