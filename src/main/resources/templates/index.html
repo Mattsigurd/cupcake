@@ -9,7 +9,7 @@
 
     <div id="page-content">
 
-        <div th:replace="~{fragments :: header('Welcome')}"></div>
+        <div th:replace="~{fragments :: header('Velkommen')}"></div>
 
         <div class="centered-form">
             <form method="post">
@@ -21,7 +21,7 @@
                 <p class="errormessage" th:text="${#ctx.message}"></p>
             </form>
         </div>
-        <div th:replace="~{fragments :: footer}"></div>
+        <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Opret bruger</a>
     </div>
 </div>
 </body>

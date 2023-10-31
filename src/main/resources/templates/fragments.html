@@ -19,9 +19,9 @@
         </header>
 
         <footer th:fragment="footer">
-            <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Create account</a>
+            <a th:if="${#ctx.session.currentUser} == null" th:href="@{/createuser}">Opret bruger</a>
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Logout</a>
-            <a href="/">Home</a>
+            <a href="/">Startside</a>
         </footer>
     </div>
 </div>
