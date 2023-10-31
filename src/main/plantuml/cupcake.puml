@@ -1,0 +1,24 @@
+@startuml
+
+Title Cupcake Projekt
+
+State home
+State logout
+State kategorier
+State cart
+State payment
+
+
+[*] -> home
+home --> home : retur
+home --> kategorier : log på
+kategorier --> cart : go to cart
+cart --> kategorier : return to buy more
+cart --> payment : go to payment
+payment --> kategorier : betallingen gennemført
+kategorier --> logout
+home --> logout : logout
+
+
+
+@enduml
