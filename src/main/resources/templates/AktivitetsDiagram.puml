@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+@startuml
+
+Title Cupcake Projekt
+
+State startside
+State opretBruger
+State logUd
+State bestillinger
+State indkøbskurv: cartItems
+State betaling: udtager penge fra DB: fejlmeddelse hvis mangel på penge
+State orderoversigt: brugeroversigt over deres ordre
+State bruger_og_orderoversigt: Adminoversigt over bruger og deres ordre
+
+
+
+[*] -> startside
+startside --> startside : retur
+startside --> bestillinger : log på
+bestillinger --> indkøbskurv : gå til indkøbskurv
+indkøbskurv --> bestillinger : tilbage til bestillinger
+indkøbskurv --> betaling : til betaling
+betaling --> bestillinger : betaling gennemført
+betaling --> logUd
+bestillinger --> logUd
+startside --> logUd : log ud
+bestillinger --> orderoversigt: se, ret, slet order og køb gemte ordre
+orderoversigt --> betaling
+orderoversigt --> logUd : log ud
+orderoversigt --> startside : tilbage
+logUd --> startside: retur
+bestillinger --> bruger_og_orderoversigt : slette bruger og ordre
+bruger_og_orderoversigt --> logUd: log ud
+startside --> opretBruger : opret bruger
+
+@enduml
+
+@enduml
