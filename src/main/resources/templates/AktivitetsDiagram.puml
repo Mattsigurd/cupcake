@@ -19,7 +19,6 @@ State bruger_og_orderoversigt: Adminoversigt over bruger og deres ordre
 
 
 [*] -> startside
-startside --> startside : retur
 startside --> bestillinger : log på
 bestillinger --> indkøbskurv : gå til indkøbskurv
 indkøbskurv --> bestillinger : tilbage til bestillinger
@@ -31,11 +30,10 @@ startside --> logUd : log ud
 bestillinger --> orderoversigt: se, ret, slet order og køb gemte ordre
 orderoversigt --> betaling
 orderoversigt --> logUd : log ud
-orderoversigt --> startside : tilbage
-logUd --> startside: retur
 bestillinger --> bruger_og_orderoversigt : slette bruger og ordre
 bruger_og_orderoversigt --> logUd: log ud
 startside --> opretBruger : opret bruger
+opretBruger --> startside: oprettet bruger
 
 @enduml
 
