@@ -35,6 +35,7 @@ bruger_og_orderoversigt --> logUd: log ud
 startside --> opretBruger : opret bruger
 opretBruger --> startside: oprettet bruger
 indkøbskurv --> logUd
+betaling --> bestillinger: tilbage til bestillinger
 
 @enduml
 
