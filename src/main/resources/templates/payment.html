@@ -33,6 +33,7 @@
             </ol>
             <button type="submit" formaction="/createorder">Gennemfør betaling</button>
         </form>
+        <p>Pris i alt: <span th:text="${#ctx.session.cart.gettotalprice}"></span></p>
 
         <footer th:fragment="footer">
 
