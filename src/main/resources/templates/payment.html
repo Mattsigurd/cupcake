@@ -36,9 +36,14 @@
         <p>Pris i alt: <span th:text="${#ctx.session.cart.gettotalprice}"></span></p>
 
         <footer th:fragment="footer">
-
+            <form method="get" action="/order">
+                <button type="submit">Tilbage til bestillinger</button>
+            </form>
             <a th:if="${#ctx.session.currentUser} != null" th:href="@{/logout}">Log ud</a>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 84a02ecc5714a898d6b9dbb4fb1901c19b987bc3
         </footer>
     </div>
 </div>
