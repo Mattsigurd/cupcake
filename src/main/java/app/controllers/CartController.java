@@ -6,8 +6,6 @@ import app.model.Bottoms;
 import app.model.Cart;
 import app.model.Orderline;
 import app.model.Tops;
-import app.persistence.Calculator;
-import app.persistence.ConnectionPool;
 import io.javalin.http.Context;
 
 import java.util.Map;
